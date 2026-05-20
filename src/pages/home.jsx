@@ -15,12 +15,13 @@ export default function Home({ search, selectedCategory }) {
   const debouncedSearch = useDebounce(search, 400);
 
   const filteredProducts = products.filter((product) => {
+    const activeCatagory = selectedCategory || 'all';
     const matchesSearch = product.title
       .toLowerCase()
       .includes(debouncedSearch.toLowerCase());
 
     const matchesCategory =
-      selectedCategory === 'all' || product.category === selectedCategory;
+      selectedCategory === 'all' || product.category === activeCatagory;
 
     return matchesSearch && matchesCategory;
   });
