@@ -91,21 +91,25 @@ export default function Header({
             <span className="material-symbols-outlined">person</span>
           </Link>
 
-          <Link to="/favorites" title="Favorites">
-            <span className="material-symbols-outlined">favorite</span>
+          <Link
+            to="/favorites"
+            title="Favorites"
+            className=" relative inline-flex"
+          >
+            <span className="material-symbols-outlined p-1">favorite</span>
 
             {totalFavorites > 0 && (
-              <span className="absolute -top-2 -right-3 text-xs bg-black text-white rounded-full px-1">
+              <span className="absolute -top-1 -right-1 min-w-4 h-4 text-[10px] bg-black text-white rounded-full flex items-center justify-center leading-none">
                 {totalFavorites}
               </span>
             )}
           </Link>
 
-          <Link to="/cart" title="Cart">
+          <Link to="/cart" title="Cart" className=" relative inline-flex p-1">
             <span className="material-symbols-outlined">shopping_bag</span>
 
             {totalItems > 0 && (
-              <span className="absolute -top-2 -right-3 text-xs bg-black text-white rounded-full px-1">
+              <span className="absolute -top-1 -right-1 min-w-4 h-4 text-[10px] bg-black text-white rounded-full flex items-center justify-center leading-none">
                 {totalItems}
               </span>
             )}
