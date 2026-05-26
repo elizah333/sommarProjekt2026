@@ -1,16 +1,35 @@
-# React + Vite
+# Phake Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+En webshop byggd med React som hämtar produkter från DummyJSON API.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Klona projektet
+2. Installera beroenden:
+npm install
+3. Starta projektet:
+npm run dev
+4. Öppna webbläsaren och gå till `http://localhost:5173`
 
-## React Compiler
+## Funktioner
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Produktlista med sök och kategorifilter
+- Produktsida med detaljerad information
+- Kundvagn med antal och totalpris
+- Favoriter
+- Kassa med orderbekräftelse
+- Mörkt läge
 
-## Expanding the ESLint configuration
+## Debounce
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Debounce-funktionen är implementerad som en egen hook i `hooks/useDebounce.js`. Den använder `setTimeout` för att fördröja uppdateringen av sökvärdet med 400ms. Om användaren fortsätter skriva innan 400ms har gått nollställs timern via cleanup-funktionen i `useEffect`. Detta gör att filtrering av produkter bara sker när användaren slutat skriva, istället för för varje tangenttryckning.
+
+## Felhantering
+
+Alla API-anrop använder `try...catch...finally` enligt följande mönster:
+
+- `try` — hämtar data från API och uppdaterar state
+- `catch` — fångar upp nätverksfel och visar ett felmeddelande för användaren
+- `finally` — stänger av laddningsindikatorn oavsett om anropet lyckades eller misslyckades
+
+Felhantering finns implementerad i `Home.jsx`, `ProductDetails.jsx` och `Header.jsx`.

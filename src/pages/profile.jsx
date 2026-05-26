@@ -2,10 +2,13 @@ import { useState } from 'react';
 
 // Profilsida med inloggningsformulär som visar bekräftelse när man har loggat in
 export default function Profile() {
-  const [signedIn, setSignedIn] = useState(false);
+  const [signedIn, setSignedIn] = useState(
+    localStorage.getItem('signedIn') === 'true'
+  );
 
   function handleSubmit(event) {
     event.preventDefault();
+    localStorage.setItem('signedIn', 'true');
     setSignedIn(true);
   }
 
