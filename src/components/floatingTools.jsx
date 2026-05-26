@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaApple, FaAndroid } from 'react-icons/fa6';
 
+// Flytande verktygen som visar sig direkt när man scrollar neråt
 export default function FloatingTools() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -9,12 +10,15 @@ export default function FloatingTools() {
       setIsVisible(window.scrollY > 0);
     }
 
+    // Lyssnar på scroll händelser
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 
+    // Tar bort scroll lyssnaren när man går till en annan sida, stänger fliken eller laddar om sidan så att den inte körs i bakgrunden
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Scrollar användaren till toppen av sidan
   function scrollToTop() {
     window.scrollTo({
       top: 0,
@@ -22,6 +26,7 @@ export default function FloatingTools() {
     });
   }
 
+  // Rendera inget om användaren är längst upp på toppen
   if (!isVisible) return null;
 
   return (
@@ -62,7 +67,7 @@ export default function FloatingTools() {
           </div>
         </div>
       </div>
-
+      {/* Knappen för att scrolla tillbaka till toppen */}
       <button
         onClick={scrollToTop}
         className="bg-white text-black w-12 h-12 dark:bg-zinc-900 dark:text-white dark:border-zinc-700 border border-white flex items-center justify-center"

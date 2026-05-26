@@ -11,6 +11,7 @@ import FloatingTools from './components/floatingTools';
 import Favorites from './pages/favorites';
 import Profile from './pages/profile';
 import Footer from './pages/footer';
+
 export default function App() {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');

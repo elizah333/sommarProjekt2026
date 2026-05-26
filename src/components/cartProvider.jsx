@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { CartContext } from './cartContent';
+import { CartContext } from './cartContext';
 
+// Ger kundvagnsdata och funktioner till alla komponenter
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
@@ -8,6 +9,7 @@ export function CartProvider({ children }) {
     setCartItems((items) => {
       const existing = items.find((item) => item.id === product.id);
 
+      // Om produkten redan finns, öka kvantiteten istället för att lägga till en ny
       if (existing) {
         return items.map((item) =>
           item.id === product.id
@@ -34,6 +36,8 @@ export function CartProvider({ children }) {
         .map((item) =>
           item.id === id ? { ...item, quantity: item.quantity - 1 } : item
         )
+
+        // Ta bort produkten automatiskt när kvaliteten når noll
         .filter((item) => item.quantity > 0)
     );
   }
@@ -46,6 +50,7 @@ export function CartProvider({ children }) {
     setCartItems([]);
   }
 
+  // Beräkna totalpris och antal artiklar från kundvagnens innehåll
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0

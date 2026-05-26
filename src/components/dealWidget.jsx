@@ -1,15 +1,18 @@
 import { useState } from 'react';
 
+// Håller koll på om panelen är öppen eller stängd
 export default function DealWidget() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="fixed right-0 top-2/3 -translate-y-1/2 z-50 flex items-stretch">
+      {/* Klickbar flik som togglar panelen öppen eller stängd */}
       <button
         onClick={() => setIsOpen((open) => !open)}
         className="bg-black text-white px-2 py-20 text-xl font-bold"
       >
         <div className="flex flex-col items-center">
+          {/* Byter icon beroende på om den är öppen eller stängd */}
           <span className="material-symbols-outlined text-white text-xl mb-4 select-none pointer-events-none">
             {isOpen ? 'chevron_right' : 'chevron_left'}
           </span>
@@ -20,6 +23,7 @@ export default function DealWidget() {
         </div>
       </button>
 
+{/* Panelen animeras in och ut genom att ändra bredden mellan 0 och 610px */}
       <div
         className={`overflow-hidden transition-all duration-500 ease-in-out ${
           isOpen ? 'w-[610px]' : 'w-0'

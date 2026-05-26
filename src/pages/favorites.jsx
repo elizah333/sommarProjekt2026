@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useFavorites } from '../components/useFavorites.js';
+import { useFavorites } from '../hook/useFavorites.js';
 
+// Här är sidan för alla ens favoriter
 export default function Favorites() {
   const { favorites, removeFavorite } = useFavorites();
 
+  // Om man inte har favoriterat något får man ett tomt tillstånd och en länk tillbaka till shoppen
   if (favorites.length === 0) {
     return (
       <main className="max-w-6xl mx-auto p-6 dark:text-white">
@@ -18,6 +20,7 @@ export default function Favorites() {
     );
   }
 
+  // Om man har produkter visas dom i ett rutnät, klickbara till produktsidan och en knapp för att ta bort
   return (
     <main className="max-w-6xl mx-auto p-6 dark:text-white">
       <h1 className="text-3xl font-bold mb-6">Favorites</h1>

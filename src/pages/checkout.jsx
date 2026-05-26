@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import { useCart } from '../components/useCart';
+import { useCart } from '../hook/useCart';
 
+// Kassa sidan där användaren fyller i sina uppgifter och bekräftar beställningen
 export default function Checkout() {
   const { cartItems, totalPrice } = useCart();
   const [orderComplete, setOrderComplete] = useState(false);
 
+  // Förhindrar sidladdning och markerar ordern som genomförd
   function handleSubmit(event) {
     event.preventDefault();
     setOrderComplete(true);
   }
 
+  // Om ordern är genomförd visas en bekgräftelse kort
   if (orderComplete) {
     return (
       <main className="min-h-[70vh] flex items-center justify-center p-10 dark:text-white">
@@ -28,6 +31,7 @@ export default function Checkout() {
     );
   }
 
+  // Formulär som man måste fylla i
   return (
     <main className="min-h-[70vh] flex items-center justify-center p-6 dark:text-white">
       <div className="w-full max-w-4xl">
@@ -62,9 +66,11 @@ export default function Checkout() {
             className="border dark:border-zinc-700 dark:bg-zinc-800 dark:text-white p-3 rounded"
           />
 
+{/* Orderöversikt som visar alla produkter och priset */}
           <div className="border-t dark:border-zinc-700 pt-4">
             <h2 className="text-xl font-semibold mb-3">Order summary</h2>
 
+{/* Loopar igenom kundvagnen och visar varje produkt med pris */}
             <div className="space-y-2">
               {cartItems.map((item) => (
                 <div key={item.id} className="flex justify-between text-sm">

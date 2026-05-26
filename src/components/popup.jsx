@@ -1,24 +1,31 @@
 import { useState } from 'react';
 
+// Vid första besök får man dessa erbjudandepopup och cookiebanner
 export default function Popups() {
+
+  // Visar erbjudandepopupen om användaren inte redan stängt den tidigare
   const [showCookie, setShowCookie] = useState(
     localStorage.getItem('cookiesAccepted') !== 'true'
   );
 
+// Visar cookiebannern om användaren inte redan accepterat eller avisat cookies
   const [showDeal, setShowDeal] = useState(
     localStorage.getItem('dealSeen') !== 'true'
   );
 
+// Sparar att användaren accepterat cookies och stänger
   function acceptCookies() {
     localStorage.setItem('cookiesAccepted', 'true');
     setShowCookie(false);
   }
 
+  // Sparar att användaren har nekat cookies och stänger
   function rejectCookies() {
     localStorage.setItem('cookiesAccepted', 'false');
     setShowCookie(false);
   }
 
+  // Sparar att användaren har sett och stänger erbjudandet
   function closeDeal() {
     localStorage.setItem('dealSeen', 'true');
     setShowDeal(false);

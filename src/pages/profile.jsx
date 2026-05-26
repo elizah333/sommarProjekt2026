@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+// Profilsida med inloggningsformulär som visar bekräftelse när man har loggat in
 export default function Profile() {
   const [signedIn, setSignedIn] = useState(false);
 
@@ -8,6 +9,7 @@ export default function Profile() {
     setSignedIn(true);
   }
 
+  // Visar bekräftelse när man har loggat in
   if (signedIn) {
     return (
       <main className="min-h-[70vh] flex items-center justify-center p-6 dark:text-white">
@@ -26,6 +28,7 @@ export default function Profile() {
     );
   }
 
+  // Inloggningsformulär med epost och lösenord
   return (
     <main className="min-h-[70vh] flex items-center justify-center p-6 dark:text-white">
       <div className="w-full max-w-md">
@@ -59,6 +62,7 @@ export default function Profile() {
             Sign in
           </button>
 
+          {/* Skapa konto knapp som inte leder någonstans */}
           <button
             type="button"
             className="border dark:border-zinc-700 p-3 rounded-full"

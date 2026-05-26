@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useCart } from '../components/useCart';
+import { useCart } from '../hook/useCart';
 
+// Visar alla produkter i kundvagnen med möjlighet att ändra antal och ta bort produkter
 export default function Cart() {
+  // Här hämtar den all kundvagnsdata och funktioner från context
   const {
     cartItems,
     totalPrice,
@@ -10,6 +12,7 @@ export default function Cart() {
     removeItem,
   } = useCart();
 
+  // Om kundvagnen är tom returnerar den ett tomt tillstånd med länk tillbaka till shoppen
   if (cartItems.length === 0) {
     return (
       <main className="min-h-[60vh] flex items-center justify-center p-10 dark:text-white">
@@ -31,11 +34,12 @@ export default function Cart() {
       </main>
     );
   }
-
+  // Om dett finns produkter visas antalet här med knapper för justeringar
   return (
     <main className="max-w-4xl mx-auto p-6 dark:text-white">
       <h1 className="text-3xl font-bold mb-6">Cart</h1>
 
+      {/* Loopar igenom alla produkter i kundvagnen och renderar ett kort för varje */}
       <div className="space-y-4">
         {cartItems.map((item) => (
           <div
@@ -48,6 +52,7 @@ export default function Cart() {
                 ${item.price} each
               </p>
 
+              {/* Knapparna för att öka, minska eller ta bort produkten */}
               <div className="flex items-center gap-3 mt-3">
                 <button
                   onClick={() => decreaseQuantity(item.id)}
@@ -74,6 +79,7 @@ export default function Cart() {
               </div>
             </div>
 
+            {/* Visar total priset för hela kundvagnen och n länk till kassan */}
             <p className="font-bold">
               ${(item.price * item.quantity).toFixed(2)}
             </p>

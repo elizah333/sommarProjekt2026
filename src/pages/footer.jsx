@@ -14,9 +14,12 @@ import {
   FaCcApplePay,
 } from 'react-icons/fa6';
 
+// Footer med navigeringslänkar, sociala medier, nyhetsbrev form och betalningsmetoder
 export default function Footer() {
+  // Hämtar aktuella året så att copyright är alltid uppdaterat
   const year = new Date().getFullYear();
 
+  // Återanvändbar css sträng för alla footer länkar för att undvika upprepning
   const footerLink =
     'cursor-pointer text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white';
 
@@ -24,6 +27,7 @@ export default function Footer() {
     <footer className="mt-16 bg-zinc-100 dark:bg-zinc-950 dark:text-white border-t dark:border-zinc-800">
       <div className="w-full px-8 lg:px-12 py-10 grid grid-cols-1 lg:grid-cols-2 gap-12 text-xs">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-2xl mx-auto">
+          {/* Vänster kolumn med 3 olika listor */}
           <section>
             <h2 className="font-bold mb-4 text-black dark:text-white">
               PHAKE INFO
@@ -69,7 +73,7 @@ export default function Footer() {
             </ul>
           </section>
         </div>
-
+        {/* Höger kolumn, sociala medier, nyhetsbrev och betalningsmetoder */}
         <div>
           <div className="flex flex-col xl:flex-row gap-12 mb-8">
             <section>
@@ -190,39 +194,26 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Nedre rad med copyright och juridiska länkar */}
       <div className="border-t dark:border-zinc-800 px-6 py-6 text-xs text-gray-500 dark:text-gray-400">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between gap-4">
           <p>©2026-{year} Phake All Rights Reserved</p>
 
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
-            {[
-              'Privacy Center',
-              'Privacy & Cookie Policy',
-              'Manage Cookies',
-              'Terms & Conditions',
-              'Company Information',
-              'Ad Choice',
-              'DMCA Protected',
-              'Trusted Commerce',
-              'Sweden',
-            ].map((item) => (
-              <span
-                key={item}
-                className="underline cursor-pointer hover:text-black dark:hover:text-white flex items-center gap-1"
-              >
-                {item === 'Sweden' ? (
-                  <>
-                    <span className="material-symbols-outlined text-[12px]">
-                      location_on
-                    </span>
-
-                    <span>Sweden</span>
-                  </>
-                ) : (
-                  <span>{item}</span>
-                )}
+          <div className="flex flex-wrap gap-x-4 gap-y-2 underline">
+            <span className={footerLink}>Privacy Center</span>
+            <span className={footerLink}>Privacy & Cookie Policy</span>
+            <span className={footerLink}>Manage Cookies</span>
+            <span className={footerLink}>Terms & Conditions</span>
+            <span className={footerLink}>Company Information</span>
+            <span className={footerLink}>Ad Choice</span>
+            <span className={footerLink}>DMCA Protected</span>
+            <span className={footerLink}>Trusted Commerce</span>
+            <span className={`${footerLink} flex items-center gap-1`}>
+              <span className="material-symbols-outlined text-[12px]">
+                location_on
               </span>
-            ))}
+              Sweden
+            </span>
           </div>
         </div>
       </div>

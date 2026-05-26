@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCart } from '../components/useCart';
-import { useFavorites } from '../components/useFavorites';
+import { useCart } from '../hook/useCart';
+import { useFavorites } from '../hook/useFavorites';
 
+// Produktsidan som visar bild, namn, pris, kategori, info, omdöme. Knapp för välja antal, lägga till i kundvagn eller favoriter
 export default function ProductDetails() {
   const { id } = useParams();
   const { addToCart } = useCart();
@@ -14,6 +15,7 @@ export default function ProductDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // Fetching API med async
   useEffect(() => {
     async function fetchProduct() {
       try {
@@ -35,6 +37,7 @@ export default function ProductDetails() {
     fetchProduct();
   }, [id]);
 
+  // Lägger till produkten i kundvagnen och visar bekräftelse
   function handleAddToCart() {
     addToCart(product, quantity);
     setAddedMessage(`${quantity} item(s) added to cart`);
@@ -60,6 +63,8 @@ export default function ProductDetails() {
     <main className="max-w-6xl mx-auto p-4 sm:p-6 dark:text-white">
       <div className="grid md:grid-cols-2 gap-8 lg:gap-10 bg-white dark:bg-zinc-900 dark:border-zinc-700 border rounded-2xl p-4 sm:p-6">
         <div className=" dark:bg-white rounded-2xl p-4 flex items-center justify-center">
+
+          {/* Produktens namn, kategori, info och omdöme */}
           <img
             src={product.thumbnail}
             alt={product.title}
@@ -84,16 +89,11 @@ export default function ProductDetails() {
                 Rating: {product.rating}
               </span>
             )}
-
-            {product.stock && (
-              <span className="bg-gray-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
-                Stock: {product.stock}
-              </span>
-            )}
           </div>
 
           <p className="text-3xl font-semibold mb-6">${product.price}</p>
 
+          {/* Antal väljare */}
           <div className="flex items-center gap-4 mb-6">
             <button
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -112,6 +112,7 @@ export default function ProductDetails() {
             </button>
           </div>
 
+{/* Knapparna för att lägga till i kundvagn eller favorit */}
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={handleAddToCart}
